@@ -1,0 +1,3 @@
+-Criar arquivo de registro de usuário;
+-Criar arquivo de registro de login (com autenticação usando token);
+-criar formulário de pesquisa
