@@ -11,6 +11,7 @@
   "author": "@Erick_Garcia",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.1.0",
     "body-parser": "^1.20.1",
     "consign": "^0.1.6",
     "cors": "^2.8.5",

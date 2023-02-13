@@ -1,15 +1,15 @@
-const RegistrationModel = require('../Models/Registration')
+const userModel = require('../Models/User')
 
 function RegistrationController() {}
 
 RegistrationController.prototype.get = async (req, res) => {
 
     try {
-        const result = await RegistrationModel.findOne(req.query)
+        const result = await userModel.findOne(req.query)
         console.log(result)
         res.status(200).send({msg: 'Dado recuperado com sucesso ', result})
     } catch(error) {
-        res.status(500).send({msg: 'Não foi possível recuperar os dados solicitados', result})
+        res.status(500).send({msg: 'Não foi possível recuperar os dados solicitados', error})
     }
 }
 
@@ -24,7 +24,7 @@ RegistrationController.prototype.post = async (req, res) => {
            return
         }
 
-        const registration = await RegistrationModel.create(jRegistration)
+        const registration = await userModel.create(jRegistration)
         console.log(registration)
         res.status(200).send({msg: 'Usuário registrado com sucesso', registration})   
         return

@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const bcrypt = require('bcrypt')
 
 const {Schema} = mongoose
 const schema = new Schema({
@@ -16,8 +17,10 @@ const schema = new Schema({
     },
     password: {
         type: String,
-        require: true
+        require: true,
+        select: false,
+        set: value => bcrypt.hashSync(value, 10)
     }
 })
 
-module.exports = mongoose.model('registration', schema)
+module.exports = mongoose.model('user', schema)
