@@ -21,6 +21,7 @@ module.exports = (req, res, next) => {
                 return res.status(500).send({msg: 'Token inválido'})
             } else {
                 req.idUser = decoder.idUser
+                req.idCompany = decoder.idCompany
                 next()
             }
         })

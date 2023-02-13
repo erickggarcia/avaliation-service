@@ -1,6 +1,7 @@
 const userModel = require('../Models/User')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
+const Company = require('../Models/Company')
 
 function LoginController() {}
 
@@ -12,7 +13,7 @@ LoginController.prototype.post = async (req, res) => {
         return
     }
 
-    const user = await userModel.findOne({email: email}, '+password')
+    const user = await userModel.findOne({email: email}, '+password company')
 
     if(!user) {
         res.status(401).send({msg: 'Não foi possível realizar o login'})
@@ -30,7 +31,8 @@ LoginController.prototype.post = async (req, res) => {
             const secret = process.env.SECRET
 
             const token = jwt.sign({
-                idUser: user._id                
+                idUser: user._id,
+                idCompany: Company._id                
             }, secret
             )
 

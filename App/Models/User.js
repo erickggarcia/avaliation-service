@@ -18,8 +18,18 @@ const schema = new Schema({
     password: {
         type: String,
         require: true,
-        select: false,
+        select: false, //não selecionado na busca, apenas forçando com "+"
         set: value => bcrypt.hashSync(value, 10)
+    },
+    company: {
+        type: Schema.Types.ObjectId, //necessário criar a empresa para obter o id
+        ref: 'company',
+        require: true
+    },
+    form: {
+        type: Schema.Types.ObjectId,
+        ref: 'form',
+        require: true
     }
 })
 

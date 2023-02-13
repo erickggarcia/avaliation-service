@@ -2,13 +2,17 @@ const mongoose = require('mongoose')
 const {Schema} = mongoose
 
 const schema = new Schema({
-    avaliation: {
+    template: {
+        type: Schema.Types.ObjectId,
+        ref: 'template',
+        require: true
+    },
+    answer: {
         type: Number,
         require: true
     },
-    user: {
-        type: Schema.Types.ObjectId,
-        ref: 'user'
+    observation: {
+        type: String
     }
 })
 
