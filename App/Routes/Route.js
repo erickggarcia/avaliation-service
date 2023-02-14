@@ -13,9 +13,6 @@ module.exports = (app) => {
     app.get('/api/v1/form', (req, res) => FormController.get(req, res))
     app.post('/api/v1/form', (req, res) => FormController.post(req, res))
 
-    app.get('/api/v1/form', (req, res) => FormController.get(req, res))
-    app.post('/api/v1/form', (req, res) => FormController.post(req, res))
-
     app.get('/api/v1/template', (req, res) => TemplateController.get(req, res))
     app.post('/api/v1/template', (req, res) => TemplateController.post(req, res))
     app.put('/api/v1/template', (req, res) => TemplateController.get(req, res))

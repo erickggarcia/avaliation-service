@@ -25,11 +25,6 @@ const schema = new Schema({
         type: Schema.Types.ObjectId, //necessário criar a empresa para obter o id
         ref: 'company',
         require: true
-    },
-    form: {
-        type: Schema.Types.ObjectId,
-        ref: 'form',
-        require: true
     }
 })
 

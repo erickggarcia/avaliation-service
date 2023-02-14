@@ -23,26 +23,28 @@ FormController.prototype.post = async (req, res) => {
     try{
         const {template, answer, observation} = req.body // mandando id
 
-        if(!template || !answer || !observation) {
+        if(!template || isNaN(answer) || !observation) {
             res.status(503).send({msg: 'Serviço não está disponível'})
             return
         }
 
         const jAvaliation = {template, answer, observation}
-        const Ntemplate = await templateModel.find({_id: template})
+        const Ntemplate = await templateModel.findOne({_id: template}) //Buscando o template inteiro através do Id --> findOne, pois quero trazer apenas um item e não uma lista
+        console.log(jAvaliation, Ntemplate)
+        console.log(Ntemplate.searchType === 'like' && answer === 0 || Ntemplate.searchType === 'like' && answer === 1)
+        if(Ntemplate.searchType === 'nps' && answer >= 1 && answer <= 10) {
 
-        if(template.searchType === 'nps' && answer > 0 && answer < 11) {
-
-            const ServiceAvaliation = await formModel.create(jAvaliation)
+            const ServiceAvaliation = await formModel.create(jAvaliation) 
             res.status(200).send({msg: 'Avaliação realizada com sucesso', ServiceAvaliation})
 
-        } else if(Ntemplate.searchType === 'like' && answer === 0 || answer === 1) {
+        } else if(Ntemplate.searchType === 'like' && answer === 0 || Ntemplate.searchType === 'like' && answer === 1) { //validação do template
 
             const ServiceAvaliation = await formModel.create(jAvaliation)
             res.status(200).send({msg: 'Avaliação realizada com sucesso', ServiceAvaliation})
 
         } else {
-            res.status(404).send({msg: 'Por favor, preencha os dados novamente'})
+            res.status(404).send({msg: 'Por favor, preencha os dados novamente', template})
+            console.log(Ntemplate)
         }   
         
     } catch(error) {
