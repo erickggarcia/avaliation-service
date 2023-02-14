@@ -30,8 +30,8 @@ FormController.prototype.post = async (req, res) => {
 
         const jAvaliation = {template, answer, observation}
         const Ntemplate = await templateModel.findOne({_id: template}) //Buscando o template inteiro através do Id --> findOne, pois quero trazer apenas um item e não uma lista
+
         console.log(jAvaliation, Ntemplate)
-        console.log(Ntemplate.searchType === 'like' && answer === 0 || Ntemplate.searchType === 'like' && answer === 1)
         if(Ntemplate.searchType === 'nps' && answer >= 1 && answer <= 10) {
 
             const ServiceAvaliation = await formModel.create(jAvaliation) 
